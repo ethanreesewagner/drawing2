@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drawing App</title>
+</head>
+<body>
+    <h1>PC and Mobile Friendly Drawing App</h1>
+    <canvas id="myCanvas" width="500" height="500"
+    style="border:1px solid black">
+    Your browser does not support the canvas element.
+    </canvas><br>
+    <input id="color" placeholder="Color"> <input id="width" placeholder="Line Width" value=5>
+    <script>
+        var c = document.getElementById("myCanvas");
+        var ctx = c.getContext("2d");
+        var paint = false;
+        c.addEventListener("touchstop",() => {paint=false;});
+        c.addEventListener("touchstart",() => {paint=true;});
+        c.addEventListener("touchmove", (e) => {
+            if(!paint){return;}
+            ctx.fillStyle = document.getElementById("color").value;
+            ctx.strokeStyle = document.getElementById("color").value;
+            ctx.lineWidth = document.getElementById("width").value;
+            ctx.beginPath();
+            width = 
+            ctx.arc(e.touches[0].clientX, e.touches[0].clientY-160, document.getElementById("width").value, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.stroke();
+        });
+        c.addEventListener("mouseup",() => {paint=false;});
+        c.addEventListener("mousedown",() => {paint=true;});
+        c.addEventListener("mousemove", (e) => {
+            if(!paint){return;}
+            ctx.fillStyle = document.getElementById("color").value;
+            ctx.strokeStyle = document.getElementById("color").value;
+            ctx.lineWidth = document.getElementById("width").value;
+            ctx.beginPath();
+            ctx.arc(event.clientX, event.clientY-85, document.getElementById("width").value, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.stroke();
+        });
+    </script>
+</body>
+</html>
